@@ -15,8 +15,15 @@ public class Blog {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private int blogId;
-	private String blogname, blogContent, status, username;
+	private String blogname, blogContent, status, userId;
 	
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	private int likes;
 	private Date createDate;
 	
@@ -45,12 +52,7 @@ public class Blog {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 	public int getLikes() {
 		return likes;
 	}

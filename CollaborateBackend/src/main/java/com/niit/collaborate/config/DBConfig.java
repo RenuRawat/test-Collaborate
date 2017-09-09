@@ -24,8 +24,8 @@ import com.niit.collaborate.Model.Blog;
 public class DBConfig {
 	
 	// 1 create a DataSource obj which is used for LocalSessionFactory
-	@Autowired
-	@Bean(name="driverManagerDataSource")
+	
+	@Bean
 	public DataSource getOracleDataSource() 
 	{
 		DriverManagerDataSource driverManagerDataSource= new DriverManagerDataSource();
@@ -48,7 +48,7 @@ public class DBConfig {
 	{
 		Properties properties=new Properties();
 		properties.setProperty("hibernate.hbm2ddl.auto", "update");
-		properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle11gDialect");
+		properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
 		
 		System.out.println("Hibernate property Object Created");
 		
@@ -58,7 +58,7 @@ public class DBConfig {
 	// 3 create a SessionFactory Bean.....local sessionfactory.....
 	// sessionFactorydepend on ("hibernate core dependency").
 	
-	@Autowired
+	
 	@Bean
 	public SessionFactory getSessionFactory()
 	{
@@ -71,7 +71,7 @@ public class DBConfig {
 	
 	// 4 HibernateTransaction Bean
 	
-	@Autowired
+	
 	@Bean
 	public HibernateTransactionManager getHibernateTransactionManager(SessionFactory sessionFactory) {
 		
@@ -83,8 +83,8 @@ public class DBConfig {
 	
 	// 5 Application Specific Dao bean.
 	
-	@Autowired
-	@Bean(name="BlogDaoImpl")
+	
+	@Bean
 	public BlogDaoImpl getBlogDAO(SessionFactory sessionFactory)
 	{
 	return new BlogDaoImpl(sessionFactory);
