@@ -5,7 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 import com.niit.collaborate.DaoImpl.BlogDaoImpl;
+import com.niit.collaborate.DaoImpl.ChatDaoImpl;
+import com.niit.collaborate.DaoImpl.ForumDaoImpl;
+import com.niit.collaborate.DaoImpl.FriendDaoImpl;
+import com.niit.collaborate.DaoImpl.JobsDaoImpl;
+import com.niit.collaborate.DaoImpl.UserDaoImpl;
 import com.niit.collaborate.Model.Blog;
+import com.niit.collaborate.Model.Chat;
+import com.niit.collaborate.Model.Forum;
+import com.niit.collaborate.Model.Friend;
+import com.niit.collaborate.Model.Jobs;
+import com.niit.collaborate.Model.User;
 
 @Configuration
 @ComponentScan("com.niit.collaborate")
@@ -65,6 +75,11 @@ public class DBConfig {
 		LocalSessionFactoryBuilder localSessionFactoryBuilder= new LocalSessionFactoryBuilder(getOracleDataSource());
 		localSessionFactoryBuilder.addProperties(getHibernateProperties());
 		localSessionFactoryBuilder.addAnnotatedClass(Blog.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Jobs.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Chat.class);
+		localSessionFactoryBuilder.addAnnotatedClass(User.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
 		System.out.println("SessionFactory Bean created");
 		return localSessionFactoryBuilder.buildSessionFactory();
 	}
@@ -89,5 +104,42 @@ public class DBConfig {
 	{
 	return new BlogDaoImpl(sessionFactory);
 	}
+	
+	@Bean
+	public ForumDaoImpl getForumDAO(SessionFactory sessionFactory)
+	{
+	return new ForumDaoImpl(sessionFactory);
+	}
+	
+	@Bean
+	public FriendDaoImpl getFriendDAO(SessionFactory sessionFactory)
+	{
+	return new FriendDaoImpl(sessionFactory);
+	}
+	
+	@Bean
+	public ChatDaoImpl getChatDAO(SessionFactory sessionFactory)
+	{
+	return new ChatDaoImpl(sessionFactory);
+	}
+	
+	@Bean
+	public JobsDaoImpl getJobsDAO(SessionFactory sessionFactory)
+	{
+	return new JobsDaoImpl(sessionFactory);
+	}
+	
+	@Bean
+	public UserDaoImpl getUserDAO(SessionFactory sessionFactory)
+	{
+	return new UserDaoImpl(sessionFactory);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -18,16 +18,18 @@ public class Blog {
 	private String blogname, blogContent, status, userId;
 	
 	
+	
+	private int likes;
+	private Date createDate;
+	
+	
+	
 	public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	private int likes;
-	private Date createDate;
-	
-	
 	public int getBlogId() {
 		return blogId;
 	}

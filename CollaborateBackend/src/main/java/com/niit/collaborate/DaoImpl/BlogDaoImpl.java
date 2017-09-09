@@ -49,11 +49,11 @@ public class BlogDaoImpl implements BlogDao {
 	}
 	
 	@Transactional
-	public boolean editBlog(Blog blog) {
+	public boolean editBlog(int blogId) {
 		
 		try {
 			
-			sessionFactory.getCurrentSession().update(blog);
+			sessionFactory.getCurrentSession().update(blogId);
 			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -119,7 +119,8 @@ public class BlogDaoImpl implements BlogDao {
 		
         Blog blog = (Blog)session.get(Blog.class, blogId);
         session.delete(blog);
-        
+        session.flush();
+        session.close();
         return true;
       } catch(Exception e) {
 			System.out.println("Exception Arised:"+e); 
