@@ -50,15 +50,15 @@ public class BlogDaoTestCase {
 
 		}
 		
-		@Ignore
+		
 		@Test
 		public void editBlogTest()
 		{  
 			
-			Blog blog = new Blog();
-			blog = blogDao.getBlog(101);						
+			blog = new Blog();
+			blog = blogDao.getBlog(15);						
 			
-			blog.setBlogContent("Rest is stand for Representational State Transfer");
+			blog.setBlogContent("It is stand for Representational State Transfer");
 			blog.setUserId("srenu@gmail.com");
 			blog.setCreateDate(new java.util.Date());
 			blog.setStatus("NA");
@@ -71,8 +71,9 @@ public class BlogDaoTestCase {
 		@Test
 		public void getBlogTest(){
 			blog = new Blog();
-			blog = blogDao.getBlog(10);
-			assertEquals("Successful",10,blog.getBlogId());
+			blog = blogDao.getBlog(15);
+			
+			assertEquals("Successful",true,blog.getBlogId());
 		}
 		
 		@Ignore
@@ -106,15 +107,15 @@ public class BlogDaoTestCase {
 		}
 		
 		
-		
+		@Ignore
 		@Test
 		public void DeleteBlogTest()
 		{
 			
 			blog = new Blog();
-			blog = blogDao.getBlog(10);
+			blog = blogDao.getBlog(15);
 		
-			assertEquals("Successful",10,blog.getBlogId());
+			assertEquals("Successful",15,blog.getBlogId());
 
 			}
 		
