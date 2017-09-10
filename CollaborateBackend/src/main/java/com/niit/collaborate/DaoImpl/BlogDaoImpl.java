@@ -51,24 +51,25 @@ public class BlogDaoImpl implements BlogDao {
 	@Transactional
 	public boolean editBlog(int blogId) {
 		
-		try {
-			
-			sessionFactory.getCurrentSession().update(blogId);
-			return true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			return false;
-		}
+/*			
+			try {
+				
+				sessionFactory.getCurrentSession().saveOrUpdate(blogId);
+				return true;
+			} catch (Exception e) {
+				 System.out.println("Exception Arised:"+e); 
+				return false;
+			}
+		*/
 		
-		
-		/* try
+		 try
 		  {
 			
 			 
 		Session session = sessionFactory.openSession();	
-		session.update("Rest", "java");
-		session.update("srenu@gmail.com", "Oop lang");
-		 session.update(blogId);
+		Blog blog = (Blog)session.get(Blog.class, blogId);
+		blog.setBlogname("APPPP");
+	    session.saveOrUpdate(blogId);
 		 System.out.println("Update the table");
 		 session.close();
 		 return true;
@@ -77,7 +78,7 @@ public class BlogDaoImpl implements BlogDao {
 		  {
 			 System.out.println("Exception Arised:"+e); 
 			  return false; 
-		  }*/
+		  }
 			
 		}
     
@@ -97,7 +98,7 @@ public class BlogDaoImpl implements BlogDao {
 		
 		try {
 			blog.setStatus("A");
-			sessionFactory.getCurrentSession().saveOrUpdate(blog);	
+			sessionFactory.getCurrentSession().save(blog);	
 			System.out.println("Approve");
 			return true;
 		} catch(Exception e) {

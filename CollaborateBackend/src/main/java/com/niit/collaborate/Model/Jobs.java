@@ -1,5 +1,6 @@
 package com.niit.collaborate.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="JobTable")
-public class Jobs {
+public class Jobs implements Serializable{
 	
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)

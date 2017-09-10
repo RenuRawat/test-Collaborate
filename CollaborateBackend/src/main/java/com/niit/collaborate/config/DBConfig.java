@@ -5,7 +5,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,19 +14,18 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-
 import com.niit.collaborate.DaoImpl.BlogDaoImpl;
 import com.niit.collaborate.DaoImpl.ChatDaoImpl;
 import com.niit.collaborate.DaoImpl.ForumDaoImpl;
 import com.niit.collaborate.DaoImpl.FriendDaoImpl;
 import com.niit.collaborate.DaoImpl.JobsDaoImpl;
-import com.niit.collaborate.DaoImpl.UserDaoImpl;
+import com.niit.collaborate.DaoImpl.UserFormDaoImpl;
 import com.niit.collaborate.Model.Blog;
 import com.niit.collaborate.Model.Chat;
 import com.niit.collaborate.Model.Forum;
 import com.niit.collaborate.Model.Friend;
 import com.niit.collaborate.Model.Jobs;
-import com.niit.collaborate.Model.User;
+import com.niit.collaborate.Model.UserForm;
 
 @Configuration
 @ComponentScan("com.niit.collaborate")
@@ -35,6 +34,7 @@ public class DBConfig {
 	
 	// 1 create a DataSource obj which is used for LocalSessionFactory
 	
+	@Autowired
 	@Bean
 	public DataSource getOracleDataSource() 
 	{
@@ -54,6 +54,7 @@ public class DBConfig {
 	
 	// 2 create a Hibernate property for Datasource itz mentory,,,, which is used for LocalSessionFactory
 	
+	@Autowired
 	public Properties getHibernateProperties()
 	{
 		Properties properties=new Properties();
@@ -76,9 +77,10 @@ public class DBConfig {
 		localSessionFactoryBuilder.addProperties(getHibernateProperties());
 		localSessionFactoryBuilder.addAnnotatedClass(Blog.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
+		localSessionFactoryBuilder.addAnnotatedClass(UserForm.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Jobs.class);
-		localSessionFactoryBuilder.addAnnotatedClass(Chat.class);
-		localSessionFactoryBuilder.addAnnotatedClass(User.class);
+		localSessionFactoryBuilder.addAnnotatedClass(Chat.class); 
+		
 		localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
 		System.out.println("SessionFactory Bean created");
 		return localSessionFactoryBuilder.buildSessionFactory();
@@ -86,7 +88,7 @@ public class DBConfig {
 	
 	// 4 HibernateTransaction Bean
 	
-	
+	@Autowired
 	@Bean
 	public HibernateTransactionManager getHibernateTransactionManager(SessionFactory sessionFactory) {
 		
@@ -98,43 +100,51 @@ public class DBConfig {
 	
 	// 5 Application Specific Dao bean.
 	
-	
+	@Autowired
 	@Bean
 	public BlogDaoImpl getBlogDAO(SessionFactory sessionFactory)
 	{
 	return new BlogDaoImpl(sessionFactory);
 	}
 	
+	@Autowired
 	@Bean
 	public ForumDaoImpl getForumDAO(SessionFactory sessionFactory)
 	{
 	return new ForumDaoImpl(sessionFactory);
 	}
 	
+	@Autowired
 	@Bean
 	public FriendDaoImpl getFriendDAO(SessionFactory sessionFactory)
 	{
 	return new FriendDaoImpl(sessionFactory);
 	}
 	
+	
+	@Autowired
 	@Bean
 	public ChatDaoImpl getChatDAO(SessionFactory sessionFactory)
 	{
 	return new ChatDaoImpl(sessionFactory);
 	}
 	
+	@Autowired
 	@Bean
 	public JobsDaoImpl getJobsDAO(SessionFactory sessionFactory)
 	{
 	return new JobsDaoImpl(sessionFactory);
 	}
 	
-	@Bean
-	public UserDaoImpl getUserDAO(SessionFactory sessionFactory)
-	{
-	return new UserDaoImpl(sessionFactory);
-	}
+
 	
+	@Autowired
+	@Bean
+	public UserFormDaoImpl getUserFormDAO(SessionFactory sessionFactory)
+	{
+		//sessionFactory used for userDaoImpl class
+	return new UserFormDaoImpl(sessionFactory);
+	}
 	
 	
 	

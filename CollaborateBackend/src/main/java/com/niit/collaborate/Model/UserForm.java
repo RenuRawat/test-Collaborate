@@ -1,20 +1,30 @@
 package com.niit.collaborate.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+
 @Entity
-@Table(name="UserTable")
-public class User {
+@Table(name="UserDetails")
+public class UserForm implements Serializable{
 	
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
 	private int userId;
-	private String firstname, lastname, passwword, emailId, role, status, online;
+	private String firstname; 
+	private String lastname; 
+	private String passwword; 
+	private String emailId; 
+	private String role; 
+	private String status; 
+	private String online;
 	
 	
 	

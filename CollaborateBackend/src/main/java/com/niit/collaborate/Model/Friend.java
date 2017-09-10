@@ -1,5 +1,7 @@
 package com.niit.collaborate.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="FriendTable")
-public class Friend {
+public class Friend implements Serializable{
 	
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)

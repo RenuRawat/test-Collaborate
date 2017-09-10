@@ -32,7 +32,7 @@ public class BlogDaoTestCase {
 		}
 		
 		
-		@Ignore
+	//	@Ignore
 		@Test
 		public void createBlogTest() 
 		{
@@ -49,22 +49,22 @@ public class BlogDaoTestCase {
 			assertTrue("This will succeed.", blogDao.createBlog(blog));
 
 		}
-		
-	@Ignore
+		@Ignore
 		@Test
 		public void editBlogTest()
 		{  
 			
 			blog = new Blog();
-			blog = blogDao.getBlog(15);						
+			blog = blogDao.getBlog(19);						
 			
-			blog.setBlogContent("It is stand for Representational State Transfer");
+	/*		blog.setBlogContent("It is stand for Representational State Transfer");
 			blog.setUserId("srenu@gmail.com");
 			blog.setCreateDate(new java.util.Date());
 			blog.setStatus("NA");
-			blog.setLikes(0);
+			blog.setLikes(0);  */
 						
-		    assertEquals("This will succeed",true, blogDao.editBlog(15));
+		    assertEquals("This will succeed",true, blogDao.editBlog(19));
+			//assertEquals("Successful","Rest",blog.getBlogname());
 
 		}
 		
@@ -75,8 +75,9 @@ public class BlogDaoTestCase {
 			blog = new Blog();
 			blog = blogDao.getBlog(17);
 			
-		//	assertEquals("This will succeed.", blogDao.getBlog(14));
-			assertEquals("Successful","Rest",blog.getBlogname());
+			
+			assertEquals("This will succeed.", blogDao.getBlog(14));
+		//	assertEquals("Successful","Rest",blog.getBlogname());
 		}
 		
 		@Ignore
@@ -85,7 +86,7 @@ public class BlogDaoTestCase {
 		{
         Blog blog=new Blog();
 			
-			blog.setBlogId(1);
+			blog.setBlogId(17);
 			blog.setBlogname("Rest");
 			blog.setBlogContent("Rest is stand for Representational State Transfer");
 			blog.setUserId("srenu@gmail.com");
