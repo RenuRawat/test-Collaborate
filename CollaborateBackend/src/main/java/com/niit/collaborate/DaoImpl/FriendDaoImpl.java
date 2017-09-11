@@ -42,23 +42,23 @@ public class FriendDaoImpl implements FriendDao {
 		}
 	}
 
-	
+	@Transactional
 	public Friend getFriend(int friendId) {
 		return (Friend) sessionFactory.getCurrentSession().get(Friend.class, friendId);
 	}
 
-	
+	@Transactional
 	public List<Friend> getFriends() {
 
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Blog where status='A'");
+		Query query=session.createQuery("from FriendTable where status='A'");
 		List<Friend> listFriend=query.list();
 		session.close();
 	
 		return listFriend;
 	}
 
-	
+	@Transactional
 	public boolean approveFriend(Friend friend) {
 		try {
 			friend.setStatus("A");
@@ -73,7 +73,7 @@ public class FriendDaoImpl implements FriendDao {
 
 	}
 
-	
+	@Transactional
 	public boolean editFriend(int friendId) {
 		 try
 		  {
@@ -94,7 +94,7 @@ public class FriendDaoImpl implements FriendDao {
 		  }
 	}
 
-
+	@Transactional
 	public boolean deleteFriend(int friendId) {
 		try {  
 			Session session = sessionFactory.openSession();

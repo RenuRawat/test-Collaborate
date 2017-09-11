@@ -27,7 +27,6 @@ public class ForumDaoImpl implements ForumDao {
 	}
 	
     @Transactional
-	
 	public boolean createForum(Forum forum) {
 		try {
 			sessionFactory.getCurrentSession().save(forum);
@@ -39,24 +38,24 @@ public class ForumDaoImpl implements ForumDao {
 		return false;
 	}
 
-	
+    @Transactional
 	public Forum getForum(int forumId) {
 		
 		return (Forum) sessionFactory.getCurrentSession().get(Forum.class, forumId);
 	}
 
-	
+    @Transactional
 	public List<Forum> getForums() {
 	
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Blog where status='A'");
+		Query query=session.createQuery("from ForumTable where status='A'");
 		List<Forum> listForum=query.list();
 		session.close();
 	
 		return listForum;
 	}
 
-	
+    @Transactional
 	public boolean approveForum(Forum forum) {
 		try {
 			forum.setStatus("A");
@@ -70,7 +69,8 @@ public class ForumDaoImpl implements ForumDao {
 		
 
 	}
-	
+    
+    @Transactional
 	public boolean editForum(int forumId) {
 		try
 		  {
@@ -91,7 +91,7 @@ public class ForumDaoImpl implements ForumDao {
 		  }
 	}
 
-	
+    @Transactional
 	public boolean deleteForum(int forumId) {
 		try {  
 			Session session = sessionFactory.openSession();

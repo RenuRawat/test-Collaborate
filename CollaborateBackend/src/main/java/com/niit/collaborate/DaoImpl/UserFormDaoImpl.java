@@ -10,9 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborate.Dao.UserFormDao;
-import com.niit.collaborate.Model.Blog;
-import com.niit.collaborate.Model.Friend;
-import com.niit.collaborate.Model.Jobs;
+
 import com.niit.collaborate.Model.UserForm;
 
 
@@ -30,7 +28,10 @@ public class UserFormDaoImpl implements UserFormDao {
 	
 	@Transactional
 	public boolean createUserForm(UserForm userForm) {
-		try 
+		
+		
+		
+	try 
 		{
 		Session session= sessionFactory.openSession();
 		 
@@ -48,34 +49,40 @@ public class UserFormDaoImpl implements UserFormDao {
 		return false;
 		}
 		
-		
+	}
 		/*try 
 		{
 		 sessionFactory.getCurrentSession().save(userForm);	
-		 
+		  System.out.println("Insert Table");
+
 		return true;	
 		} catch(Exception e)
 		{
 		System.out.println("Exception Arised:" +e);	
 		return false;
-		}*/
+		}
+	}
+*/
+	@Transactional
+	public UserForm getUserForm(int userId) {
+		return (UserForm) sessionFactory.getCurrentSession().get(UserForm.class, userId);
+		
+	//	Select * from emp_table where emp_id='123';
+		
 	}
 
 	
-	public UserForm getUserForm(int userFormId) {
-		return (UserForm) sessionFactory.getCurrentSession().get(UserForm.class, userFormId);
-	}
-
-	
+	@Transactional
 	public List<UserForm> getUserForms() {
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Blog where status='A'");
+		Query query=session.createQuery("from UserDetails where status='A'");
 		List<UserForm> listUserForm=query.list();
 		session.close();
 	
 		return listUserForm;
 	}
 
+	@Transactional
 	public boolean approveUserForm(UserForm userForm) {
 		try {
 			userForm.setStatus("A");
@@ -90,14 +97,14 @@ public class UserFormDaoImpl implements UserFormDao {
 
 	}
 
-	
-	public boolean editUserForm(int userFormId) {
+	@Transactional
+	public boolean editUserForm(int userId) {
 		 try
 		  {
 			
 			 
 		Session session = sessionFactory.openSession();	
-		UserForm userForm = (UserForm)session.get(UserForm.class, userFormId);
+		UserForm userForm = (UserForm)session.get(UserForm.class, userId);
 	
 	    session.update(userForm);
 		 System.out.println("Update the table");
@@ -112,11 +119,12 @@ public class UserFormDaoImpl implements UserFormDao {
 	}
 
 	
-	public boolean deleteUserForm(int userFormId) {
+	@Transactional
+	public boolean deleteUserForm(int userId) {
 		try {  
 			Session session = sessionFactory.openSession();
 			
-			UserForm userForm = (UserForm)session.get(UserForm.class, userFormId);
+			UserForm userForm = (UserForm)session.get(UserForm.class, userId);
 	        session.delete(userForm);
 	        session.flush();
 	        session.close();
@@ -127,4 +135,5 @@ public class UserFormDaoImpl implements UserFormDao {
 			}
 	}
 
+	
 }

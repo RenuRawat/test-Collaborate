@@ -86,7 +86,7 @@ public class BlogDaoImpl implements BlogDao {
 	public List<Blog> getBlogs() {
 		
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Blog where status='A'");
+		Query query=session.createQuery("from BlogTable where status='A'");
 		List<Blog> listBlog=query.list();
 		session.close();
 	

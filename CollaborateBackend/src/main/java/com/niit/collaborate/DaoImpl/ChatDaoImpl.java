@@ -46,29 +46,29 @@ public class ChatDaoImpl implements ChatDao {
 		return (Chat) sessionFactory.getCurrentSession().get(Blog.class, chatId);
 	}
 
-
+	@Transactional
 	public List<Chat> getChats() {
 		
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Blog where status='A'");
+		Query query=session.createQuery("from ChatTable where status='A'");
 		List<Chat> listChat=query.list();
 		session.close();
 	
 		return listChat;
 	}
 
-
+	@Transactional
 	public boolean approveChat(Chat chat) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	@Transactional
 	public boolean editChat(int chatId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	
+	@Transactional
 	public boolean deleteChat(int chatId) {
 		try {  
 			Session session = sessionFactory.openSession();

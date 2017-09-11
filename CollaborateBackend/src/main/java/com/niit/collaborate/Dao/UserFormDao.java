@@ -10,14 +10,14 @@ public interface UserFormDao {
 	
 	public boolean createUserForm(UserForm userForm);
 	
-	public UserForm getUserForm(int userFormId);
+	public UserForm getUserForm(int userId);
 	
 	public List<UserForm> getUserForms();
 	
 	public boolean approveUserForm(UserForm userForm);
 	
-	public boolean editUserForm(int userFormId);
+	public boolean editUserForm(int userId);
 	
-	public boolean deleteUserForm(int userFormId);
+	public boolean deleteUserForm(int userId);
 
 }

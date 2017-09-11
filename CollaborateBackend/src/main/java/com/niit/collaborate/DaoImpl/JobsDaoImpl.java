@@ -40,22 +40,22 @@ public class JobsDaoImpl implements JobsDao {
 		}
 	}
 
-	
+	@Transactional
 	public Jobs getJob(int jobId) {
 		return (Jobs) sessionFactory.getCurrentSession().get(Jobs.class, jobId);
 	}
 
-	
+	@Transactional
 	public List<Jobs> getJobs() {
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Blog where status='A'");
+		Query query=session.createQuery("from JobTable where status='A'");
 		List<Jobs> listJobs=query.list();
 		session.close();
 	
 		return listJobs;
 	}
 
-	
+	@Transactional
 	public boolean editJob(int jobId) {
 		 try
 		  {
@@ -76,7 +76,7 @@ public class JobsDaoImpl implements JobsDao {
 		  }
 	}
 
-	
+	@Transactional
 	public boolean deleteJob(int jobId) {
 		try {  
 			Session session = sessionFactory.openSession();

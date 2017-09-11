@@ -15,9 +15,13 @@ import javax.persistence.Table;
 public class UserForm implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Id
-	private int userId;
+	private int Id;
 	private String firstname; 
 	private String lastname; 
 	private String passwword; 
@@ -29,10 +33,10 @@ public class UserForm implements Serializable{
 	
 	
 	public int getUserId() {
-		return userId;
+		return Id;
 	}
 	public void setUserId(int userId) {
-		this.userId = userId;
+		this.Id = userId;
 	}
 	public String getFirstname() {
 		return firstname;
