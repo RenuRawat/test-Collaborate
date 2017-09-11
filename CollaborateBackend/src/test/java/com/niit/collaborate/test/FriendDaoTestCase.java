@@ -2,6 +2,8 @@ package com.niit.collaborate.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -9,6 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 
 import com.niit.collaborate.Dao.FriendDao;
+import com.niit.collaborate.Model.Blog;
 import com.niit.collaborate.Model.Friend;
 
 
@@ -38,7 +41,7 @@ public class FriendDaoTestCase {
 	  
 	  friend.setFriendId(108);
 	  System.out.println("add1");
-	  friend.setStatus("samart technology");
+	  friend.setStatus("A");
 	  System.out.println("add2");
 	 
 	 friend.setUserId(116);
@@ -50,6 +53,85 @@ public class FriendDaoTestCase {
 	}
 	
 
+	
+	@Ignore
+	@Test
+	public void editFriendTest()
+	{  
+		
+		friend = new Friend();
+		friend = friendDao.getFriend(118);						
+		
+		System.out.println("add1");
+		  friend.setStatus("A");
+		  System.out.println("add2");
+		 
+		 friend.setUserId(116);
+		  
+		  System.out.println("before Insert table");
+					
+	    assertTrue("This will succeed", friendDao.editFriend(118));
+	
+	}
+	
+	
+	
+	
+	@Ignore
+	@Test
+	public void getFriendTest(){
+		friend = new Friend();
+		friend = friendDao.getFriend(116);
+		
+		
+		assertEquals("This will succeed.", friendDao.getFriend(116));
+
+	}
+	
+	@Ignore
+	@Test
+	public void approveFriendTest()
+	{
+		Friend friend=new Friend();
+		friend = friendDao.getFriend(12);
+    
+		
+    System.out.println("add1");
+	  friend.setStatus("A");
+	  System.out.println("add2");
+	 
+	 friend.setUserId(116);
+	  
+	  System.out.println("before Insert table");
+		
+	   assertTrue("This will succeed.", friendDao.approveFriend(friend));
+
+		}
+	
+	
+	
+	@Ignore
+	@Test
+	public void getAllapproveFriendListTest()
+	{
+	
+		List<Friend> listFriend= friendDao.getFriends();
+		assertTrue("No Approved Blogs", listFriend.size()>0);
+	}
+	
+	
+	@Ignore
+	@Test
+	public void DeleteFriendTest()
+	{
+		
+		assertTrue("Problem in Deleting", friendDao.deleteFriend(91));
+		
+}
+
+	
+	
+	
 /*	@Test
 	public void test() {
 		fail("Not yet implemented");

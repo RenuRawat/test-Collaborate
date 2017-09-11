@@ -2,12 +2,17 @@ package com.niit.collaborate.DaoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborate.Dao.FriendDao;
+import com.niit.collaborate.Model.Blog;
+import com.niit.collaborate.Model.Chat;
+import com.niit.collaborate.Model.Forum;
 import com.niit.collaborate.Model.Friend;
 
 
@@ -39,32 +44,70 @@ public class FriendDaoImpl implements FriendDao {
 
 	
 	public Friend getFriend(int friendId) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Friend) sessionFactory.getCurrentSession().get(Friend.class, friendId);
 	}
 
 	
 	public List<Friend> getFriends() {
-		// TODO Auto-generated method stub
-		return null;
+
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from Blog where status='A'");
+		List<Friend> listFriend=query.list();
+		session.close();
+	
+		return listFriend;
 	}
 
 	
 	public boolean approveFriend(Friend friend) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			friend.setStatus("A");
+			sessionFactory.getCurrentSession().save(friend);	
+			System.out.println("Approve");
+			return true;
+		} catch(Exception e) {
+			System.out.println("Exception Arised:"+e); 
+			return false;
+		}
+		
+
 	}
 
 	
 	public boolean editFriend(int friendId) {
-		// TODO Auto-generated method stub
-		return false;
+		 try
+		  {
+			
+			 
+		Session session = sessionFactory.openSession();	
+		Friend friend = (Friend)session.get(Friend.class, friendId);
+	
+	    session.update(friend);
+		 System.out.println("Update the table");
+		 session.close();
+		 return true;
+		  }
+		  catch(Exception e) 
+		  {
+			 System.out.println("Exception Arised:"+e); 
+			  return false; 
+		  }
 	}
 
 
 	public boolean deleteFriend(int friendId) {
-		// TODO Auto-generated method stub
-		return false;
+		try {  
+			Session session = sessionFactory.openSession();
+			
+			Friend friend = (Friend)session.get(Friend.class, friendId);
+	        session.delete(friend);
+	        session.flush();
+	        session.close();
+	        return true;
+	      } catch(Exception e) {
+				System.out.println("Exception Arised:"+e); 
+				return false;
+			}
 	}
 
 }

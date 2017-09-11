@@ -32,16 +32,16 @@ public class BlogDaoTestCase {
 		}
 		
 		
-	//	@Ignore
+	    @Ignore
 		@Test
 		public void createBlogTest() 
 		{
 			Blog blog=new Blog();
 			
 			blog.setBlogId(101);
-			blog.setBlogname("JavaApp");
+			blog.setBlogname("Java");
 			blog.setBlogContent("OOL");
-			blog.setUserId("u@gmail.com");
+			blog.setUserId("ru@gmail.com");
 			blog.setCreateDate(new java.util.Date());
 			blog.setStatus("NA");
 			blog.setLikes(0);
@@ -55,15 +55,15 @@ public class BlogDaoTestCase {
 		{  
 			
 			blog = new Blog();
-			blog = blogDao.getBlog(19);						
+			blog = blogDao.getBlog(99);						
 			
-	/*		blog.setBlogContent("It is stand for Representational State Transfer");
+		blog.setBlogContent("It is stand for Representational State Transfer");
 			blog.setUserId("srenu@gmail.com");
 			blog.setCreateDate(new java.util.Date());
 			blog.setStatus("NA");
-			blog.setLikes(0);  */
+			blog.setLikes(0);  
 						
-		    assertEquals("This will succeed",true, blogDao.editBlog(19));
+		    assertTrue("This will succeed", blogDao.editBlog(99));
 			//assertEquals("Successful","Rest",blog.getBlogname());
 
 		}
@@ -73,25 +73,27 @@ public class BlogDaoTestCase {
 		@Test
 		public void getBlogTest(){
 			blog = new Blog();
-			blog = blogDao.getBlog(17);
+			blog = blogDao.getBlog(100);
 			
 			
-			assertEquals("This will succeed.", blogDao.getBlog(14));
+			assertEquals("This will succeed.", blogDao.getBlog(100));
 		//	assertEquals("Successful","Rest",blog.getBlogname());
 		}
 		
-		@Ignore
+		//@Ignore
 		@Test
 		public void approveBlogTest()
 		{
         Blog blog=new Blog();
+        
 			
-			blog.setBlogId(17);
+        blog = blogDao.getBlog(102);
+        
 			blog.setBlogname("Rest");
 			blog.setBlogContent("Rest is stand for Representational State Transfer");
 			blog.setUserId("srenu@gmail.com");
 			blog.setCreateDate(new java.util.Date());
-			blog.setStatus("A");
+			blog.setStatus("NA");
 			blog.setLikes(0);
 			
 		   assertTrue("This will succeed.", blogDao.approveBlog(blog));
@@ -115,7 +117,7 @@ public class BlogDaoTestCase {
 		public void DeleteBlogTest()
 		{
 			
-			assertTrue("Problem in Deleting", blogDao.deleteBlog(16));
+			assertTrue("Problem in Deleting", blogDao.deleteBlog(93));
 			
 }
 

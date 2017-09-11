@@ -2,11 +2,15 @@ package com.niit.collaborate.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.collaborate.Dao.ChatDao;
+import com.niit.collaborate.Model.Blog;
 import com.niit.collaborate.Model.Chat;
 import com.niit.collaborate.Model.Jobs;
 
@@ -19,6 +23,7 @@ public class ChatDaoTestCase {
 	
 	private static AnnotationConfigApplicationContext context;
 	private static ChatDao chatDao;
+	private static Chat chat;
 	
 	@BeforeClass
 	public static void initialize()
@@ -55,6 +60,52 @@ public class ChatDaoTestCase {
 
 
 	}
+	
+	
+	@Ignore
+	@Test
+	public void getChatTest(){
+		chat = new Chat();
+		chat = chatDao.getChat(97);
+		
+		
+		assertEquals("This will succeed.", chatDao.getChat(97));
+	
+	}
+	
+	
+	
+	
+	
+	@Ignore
+	@Test
+	public void getAllChatListTest()
+	{
+	
+		List<Chat> listChat= chatDao.getChats();
+		assertTrue("No Approved Blogs", listChat.size()>0);
+	}
+	
+	
+	@Ignore
+	@Test
+	public void DeleteChatTest()
+	{
+		
+		assertTrue("Problem in Deleting", chatDao.deleteChat(110));
+		
+}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

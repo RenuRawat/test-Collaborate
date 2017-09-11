@@ -2,13 +2,16 @@ package com.niit.collaborate.DaoImpl;
 
 import java.util.List;
 
-
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborate.Dao.ForumDao;
+import com.niit.collaborate.Model.Blog;
+import com.niit.collaborate.Model.Chat;
 import com.niit.collaborate.Model.Forum;
 
 @Repository("forumDao")
@@ -38,32 +41,70 @@ public class ForumDaoImpl implements ForumDao {
 
 	
 	public Forum getForum(int forumId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return (Forum) sessionFactory.getCurrentSession().get(Forum.class, forumId);
 	}
 
 	
 	public List<Forum> getForums() {
-		// TODO Auto-generated method stub
-		return null;
+	
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from Blog where status='A'");
+		List<Forum> listForum=query.list();
+		session.close();
+	
+		return listForum;
 	}
 
 	
 	public boolean approveForum(Forum forum) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		try {
+			forum.setStatus("A");
+			sessionFactory.getCurrentSession().save(forum);	
+			System.out.println("Approve");
+			return true;
+		} catch(Exception e) {
+			System.out.println("Exception Arised:"+e); 
+			return false;
+		}
+		
 
+	}
 	
 	public boolean editForum(int forumId) {
-		// TODO Auto-generated method stub
-		return false;
+		try
+		  {
+			
+			 
+		Session session = sessionFactory.openSession();	
+		Forum forum = (Forum)session.get(Forum.class, forumId);
+	
+	    session.update(forumId);
+		 System.out.println("Update the table");
+		 session.close();
+		 return true;
+		  }
+		  catch(Exception e) 
+		  {
+			 System.out.println("Exception Arised:"+e); 
+			  return false; 
+		  }
 	}
 
 	
 	public boolean deleteForum(int forumId) {
-		// TODO Auto-generated method stub
-		return false;
+		try {  
+			Session session = sessionFactory.openSession();
+			
+			Forum forum = (Forum)session.get(Forum.class, forumId);
+	        session.delete(forum);
+	        session.flush();
+	        session.close();
+	        return true;
+	      } catch(Exception e) {
+				System.out.println("Exception Arised:"+e); 
+				return false;
+			}
 	}
 
 }

@@ -2,14 +2,16 @@ package com.niit.collaborate.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.collaborate.Dao.JobsDao;
-import com.niit.collaborate.Dao.UserFormDao;
 import com.niit.collaborate.Model.Jobs;
-import com.niit.collaborate.Model.UserForm;
+
 
 public class JobsDaoTestCase {
 	
@@ -17,6 +19,7 @@ public class JobsDaoTestCase {
 	
 	private static AnnotationConfigApplicationContext context;
 	private static JobsDao jobsDao;
+	private static Jobs job;
 	
 	
 	@BeforeClass
@@ -58,19 +61,71 @@ public class JobsDaoTestCase {
 
 	}
 
+	@Ignore
+	@Test
+	public void editJobTest()
+	{  
+		
+		job = new Jobs();
+		job = jobsDao.getJob(120);						
+		
+		System.out.println("Id");
+		job.setJobProfile("Ja");
+		System.out.println("ja");
+		job.setQualification("OOa");
+		System.out.println("ooa");
+		job.setJobDesc("ITApp");
+		System.out.println("ITApp");
+		
+		job.setCreateDate(new java.util.Date());
+		System.out.println("date");
+		job.setStatus("n");
+		System.out.println("n2");
+	
+					
+	    assertTrue("This will succeed", jobsDao.editJob(120));
+	}
 	
 	
-	
-	
+	    @Ignore
+		@Test
+		public void getJobTest(){
+	    	job = new Jobs();
+	    	job = jobsDao.getJob(120);
+			
+			
+			assertEquals("This will succeed.", jobsDao.getJob(120));
+		//	assertEquals("Successful","Rest",blog.getBlogname());
+		}
+		
+		
+		
+		
+		
+		@Ignore
+		@Test
+		public void getJobsListTest()
+		{
+		
+			List<Jobs> listJobs= jobsDao.getJobs();
+			assertTrue("No Approved Blogs", listJobs.size()>0);
+		}
+		
+		
+		@Ignore
+		@Test
+		public void DeleteJobTest()
+		{
+			
+			assertTrue("Problem in Deleting", jobsDao.deleteJob(96));
+			
+}
+
 	
 	
 	
 	
 	
 
-	/*@Test
-	public void test() {
-		fail("Not yet implemented");
-	}*/
 
 }

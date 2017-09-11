@@ -2,6 +2,7 @@ package com.niit.collaborate.DaoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.collaborate.Dao.UserFormDao;
+import com.niit.collaborate.Model.Blog;
+import com.niit.collaborate.Model.Friend;
+import com.niit.collaborate.Model.Jobs;
 import com.niit.collaborate.Model.UserForm;
 
 
@@ -59,31 +63,68 @@ public class UserFormDaoImpl implements UserFormDao {
 
 	
 	public UserForm getUserForm(int userFormId) {
-		// TODO Auto-generated method stub
-		return null;
+		return (UserForm) sessionFactory.getCurrentSession().get(UserForm.class, userFormId);
 	}
 
 	
 	public List<UserForm> getUserForms() {
-		// TODO Auto-generated method stub
-		return null;
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from Blog where status='A'");
+		List<UserForm> listUserForm=query.list();
+		session.close();
+	
+		return listUserForm;
 	}
 
 	public boolean approveUserForm(UserForm userForm) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			userForm.setStatus("A");
+			sessionFactory.getCurrentSession().save(userForm);	
+			System.out.println("Approve");
+			return true;
+		} catch(Exception e) {
+			System.out.println("Exception Arised:"+e); 
+			return false;
+		}
+		
+
 	}
 
 	
 	public boolean editUserForm(int userFormId) {
-		// TODO Auto-generated method stub
-		return false;
+		 try
+		  {
+			
+			 
+		Session session = sessionFactory.openSession();	
+		UserForm userForm = (UserForm)session.get(UserForm.class, userFormId);
+	
+	    session.update(userForm);
+		 System.out.println("Update the table");
+		 session.close();
+		 return true;
+		  }
+		  catch(Exception e) 
+		  {
+			 System.out.println("Exception Arised:"+e); 
+			  return false; 
+		  }
 	}
 
 	
 	public boolean deleteUserForm(int userFormId) {
-		// TODO Auto-generated method stub
-		return false;
+		try {  
+			Session session = sessionFactory.openSession();
+			
+			UserForm userForm = (UserForm)session.get(UserForm.class, userFormId);
+	        session.delete(userForm);
+	        session.flush();
+	        session.close();
+	        return true;
+	      } catch(Exception e) {
+				System.out.println("Exception Arised:"+e); 
+				return false;
+			}
 	}
 
 }

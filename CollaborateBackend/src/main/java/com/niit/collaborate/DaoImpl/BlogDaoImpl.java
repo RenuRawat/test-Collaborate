@@ -68,8 +68,8 @@ public class BlogDaoImpl implements BlogDao {
 			 
 		Session session = sessionFactory.openSession();	
 		Blog blog = (Blog)session.get(Blog.class, blogId);
-		blog.setBlogname("APPPP");
-	    session.saveOrUpdate(blogId);
+	//	blog.setBlogname("APPPP");
+	    session.update(blog);
 		 System.out.println("Update the table");
 		 session.close();
 		 return true;
