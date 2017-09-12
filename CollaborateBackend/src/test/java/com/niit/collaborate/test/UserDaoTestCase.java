@@ -36,7 +36,7 @@ public class UserDaoTestCase {
 		}
 		
 		
-		//@Ignore
+		@Ignore
 		@Test
 		public void createUsertTest() 
 		{
