@@ -25,11 +25,12 @@ public class BlogDaoImpl implements BlogDao {
 	}
 	
 	@Transactional
-   
+	 @Override
 	public boolean createBlog(Blog blog) {
 	  try
 	  {
 	 sessionFactory.getCurrentSession().save(blog);	
+	 
 	 System.out.println("Insert the table");
 	 return true;
 	  }
@@ -41,14 +42,19 @@ public class BlogDaoImpl implements BlogDao {
 		
 	}
 
-	@Transactional
+//	@Transactional
+	 @Override
 	public Blog getBlog(int blogId) {
 		
-		return (Blog) sessionFactory.getCurrentSession().get(Blog.class, blogId);
+		Session session = sessionFactory.openSession();	
+		Blog blog = (Blog)session.get(Blog.class, blogId);
+		session.close();
+		return blog;
 		
 	}
 	
 	@Transactional
+	 @Override
 	public boolean editBlog(int blogId) {
 		
 /*			
@@ -82,7 +88,8 @@ public class BlogDaoImpl implements BlogDao {
 			
 		}
     
-	@Transactional
+//	@Transactional
+	 @Override
 	public List<Blog> getBlogs() {
 		
 		Session session=sessionFactory.openSession();
@@ -94,6 +101,7 @@ public class BlogDaoImpl implements BlogDao {
 	}
 
 	@Transactional
+	 @Override
 	public boolean approveBlog(Blog blog) {
 		
 		try {
@@ -113,6 +121,7 @@ public class BlogDaoImpl implements BlogDao {
 	
 
 	@Transactional
+	 @Override
 	public boolean deleteBlog(int blogId) {
 
       try {  

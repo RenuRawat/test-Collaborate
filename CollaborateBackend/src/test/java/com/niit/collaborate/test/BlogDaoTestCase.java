@@ -69,18 +69,14 @@ public class BlogDaoTestCase {
 		}
 		
 		
-		@Ignore
+		//@Ignore
 		@Test
 		public void getBlogTest(){
-			blog = new Blog();
-			blog = blogDao.getBlog(100);
-			
-			
-			assertEquals("This will succeed.", blogDao.getBlog(100));
-		//	assertEquals("Successful","Rest",blog.getBlogname());
+
+			assertNotNull("Problem getting blog",blogDao.getBlog(204));
 		}
 		
-		//@Ignore
+		@Ignore
 		@Test
 		public void approveBlogTest()
 		{

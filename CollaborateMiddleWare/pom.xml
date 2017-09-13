@@ -2,14 +2,15 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.niit.collaborate</groupId>
-  <artifactId>CollaborateController</artifactId>
+  <artifactId>CollaborateMiddleWare</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>CollaborateController Maven Webapp</name>
+  <name>CollaborateMiddleWare Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
-
-
+ 
+ 
+ 
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 <dependency>
     <groupId>org.springframework</groupId>
@@ -24,14 +25,30 @@
     <version>4.0.0</version>
     <scope>provided</scope>
 </dependency>
-
-
+ 
+ 
+ <dependency>
+   <groupId>com.niit.collaborate</groupId>
+  <artifactId>CollaborateBackend</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+ </dependency>
+ 
+ <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.7.5</version>
+</dependency>
+ 
+ 
+ 
+ 
+ 
+ 
   </dependencies>
-        
-  
   <build>
   
-    <plugins>
+  <plugins>
               <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
@@ -42,6 +59,7 @@
             
     </plugins>
   
-    <finalName>CollaborateController</finalName>
+  
+    <finalName>CollaborateMiddleWare</finalName>
   </build>
 </project>
