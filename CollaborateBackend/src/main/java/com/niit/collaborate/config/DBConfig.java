@@ -75,11 +75,13 @@ public class DBConfig {
 	{
 		LocalSessionFactoryBuilder localSessionFactoryBuilder= new LocalSessionFactoryBuilder(getOracleDataSource());
 		localSessionFactoryBuilder.addProperties(getHibernateProperties());
-		localSessionFactoryBuilder.addAnnotatedClass(Blog.class);
+		
+		localSessionFactoryBuilder.scanPackages("com.niit.collaborate");
+/*		localSessionFactoryBuilder.addAnnotatedClass(Blog.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
 		localSessionFactoryBuilder.addAnnotatedClass(UserForm.class);
 		localSessionFactoryBuilder.addAnnotatedClass(Jobs.class);
-		localSessionFactoryBuilder.addAnnotatedClass(Chat.class); 
+		localSessionFactoryBuilder.addAnnotatedClass(Chat.class);*/ 
 		
 		localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
 		System.out.println("SessionFactory Bean created");
@@ -100,7 +102,7 @@ public class DBConfig {
 	
 	// 5 Application Specific Dao bean.
 	
-	@Autowired
+	/*@Autowired
 	@Bean
 	public BlogDaoImpl getBlogDAO(SessionFactory sessionFactory)
 	{
@@ -147,7 +149,7 @@ public class DBConfig {
 	}
 	
 	
-	
+	*/
 	
 	
 	
